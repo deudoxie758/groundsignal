@@ -183,3 +183,5 @@ var sampleData = [
     },
   },
 ]
+
+export default sampleData

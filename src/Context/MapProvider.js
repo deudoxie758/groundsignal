@@ -1,9 +1,11 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import MapContext from './MapContext'
+import sampleData from '../Sample-data'
 
 export const MapProvider = ({ children }) => {
   const [searchResults, setSearchResults] = useState([])
   const [selectLocation, setselectedLocation] = useState(null)
+  const [locations, setLocations] = useState([])
 
   return (
     <MapContext.Provider
@@ -12,6 +14,7 @@ export const MapProvider = ({ children }) => {
         setSearchResults,
         selectLocation,
         setselectedLocation,
+        sampleData: sampleData,
       }}
     >
       {children}
