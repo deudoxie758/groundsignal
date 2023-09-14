@@ -42,8 +42,6 @@ function MapUpdater() {
 }
 
 function MapComponent() {
-  const { searchResults, selectedLocation, setSelectedLocation, setShowModal } =
-    useContext(MapContext)
   const [mapCenter, setMapCenter] = useState([42.397, -80.644])
   return (
     <div className="h-screen z-0">

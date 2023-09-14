@@ -36,6 +36,9 @@ function SearchBar() {
       setShowResultsModal(false)
     }
   }
+  const handleInputChange = (event) => {
+    setShowResultsModal(false)
+  }
   const handleResultClick = (result) => {
     setQuery(result.name)
     setSelectedLocation(result)
@@ -56,7 +59,11 @@ function SearchBar() {
         type="text"
         value={query}
         placeholder="Search..."
-        onChange={handleSearch}
+        // onChange={handleSearch}
+        onChange={(e) => {
+          handleSearch(e)
+          handleInputChange(e)
+        }}
         onFocus={handleInputFocus}
         className="pl-10 w-full px-4 py-2 border rounded-md shadow-sm focus:ring-0 focus:outline-none"
       />

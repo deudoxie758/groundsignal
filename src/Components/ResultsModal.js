@@ -7,7 +7,7 @@ function ResultsModal() {
     useContext(MapContext)
 
   if (!selectedLocation || !showResultsModal) return null
-  const resultsCount = searchResults.length
+  const resultsCount = selectedLocation ? 1 : 0
   return (
     <div className="ml-4 mt-2 absolute top-16 left-0 bg-white shadow-md rounded z-50 w-2/4">
       <div className="border-b p-2 pl-4 mb-2 bg-blue-500">
