@@ -1,4 +1,4 @@
-@import '~leaflet/dist/leaflet.css';
+@import "~leaflet/dist/leaflet.css";
 .App {
   text-align: center;
 }
@@ -41,4 +41,17 @@
   width: 100%;
   height: 100vh;
   /* You can set this to any value or even full viewport height like 100vh */
+}
+
+.leaflet-container {
+  z-index: 1 !important;
+}
+
+.leaflet-popup {
+  z-index: 1000 !important;
+}
+
+.leaflet-marker-icon,
+.leaflet-marker-shadow {
+  z-index: 1000 !important;
 }

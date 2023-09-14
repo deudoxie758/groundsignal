@@ -1,19 +1,25 @@
-import React, { useEffect, useState } from 'react'
-import MapContext from './MapContext'
+import React, { createContext, useState } from 'react'
 import sampleData from '../Sample-data'
 
-export const MapProvider = ({ children }) => {
+export const MapContext = createContext()
+
+export function MapProvider({ children }) {
   const [searchResults, setSearchResults] = useState([])
-  const [selectLocation, setselectedLocation] = useState(null)
-  const [locations, setLocations] = useState([])
+  const [selectedLocation, setSelectedLocation] = useState(null)
+  const [showModal, setShowModal] = useState(false)
+  const [showResultsModal, setShowResultsModal] = useState(false)
 
   return (
     <MapContext.Provider
       value={{
         searchResults,
         setSearchResults,
-        selectLocation,
-        setselectedLocation,
+        selectedLocation,
+        setSelectedLocation,
+        showModal,
+        setShowModal,
+        showResultsModal,
+        setShowResultsModal,
         sampleData: sampleData,
       }}
     >

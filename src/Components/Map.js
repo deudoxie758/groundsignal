@@ -1,24 +1,62 @@
-import React, { useContext } from 'react'
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet'
-import MapContext from '../Context/MapContext'
+import React, { useState, useEffect, useContext } from 'react'
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
+import { MapContext } from '../Context/MapProvider'
+import L from 'leaflet'
+import iconPin from '../icon-pin.svg'
 
-function MapComponent() {
-  const { searchResults, selectedLocation, setSelectedLocation } =
+function MapUpdater() {
+  const { selectedLocation, setSelectedLocation, showModal, setShowModal } =
     useContext(MapContext)
+  const map = useMap()
+  const customIcon = new L.Icon({
+    iconUrl: iconPin,
+    iconSize: [32, 32],
+    iconAnchor: [16, 32],
+  })
+  useEffect(() => {
+    if (selectedLocation) {
+      const newCenter = [
+        selectedLocation.location.lat,
+        selectedLocation.location.lon,
+      ]
+      map.flyTo(newCenter, 13)
+    }
+  }, [selectedLocation, map])
+  if (!selectedLocation) {
+    return null
+  }
 
   return (
-    <MapContainer center={[51.505, -0.09]} zoom={13} scrollWheelZoom={false}>
-      <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
-      {searchResults.map((result) => (
-        <Marker
-          key={result.id}
-          position={[result.location.lat, result.location.lon]}
-          onClick={() => setSelectedLocation(result)}
-        >
-          <Popup>{result.name}</Popup>
-        </Marker>
-      ))}
-    </MapContainer>
+    <Marker
+      icon={customIcon}
+      position={[selectedLocation.location.lat, selectedLocation.location.lon]}
+      eventHandlers={{
+        click: () => {
+          console.log('I work')
+          setSelectedLocation(selectedLocation)
+          setShowModal(true)
+        },
+      }}
+    ></Marker>
+  )
+}
+
+function MapComponent() {
+  const { searchResults, selectedLocation, setSelectedLocation, setShowModal } =
+    useContext(MapContext)
+  const [mapCenter, setMapCenter] = useState([42.397, -80.644])
+  return (
+    <div className="h-screen z-0">
+      <MapContainer
+        center={mapCenter}
+        zoom={5}
+        scrollWheelZoom={false}
+        zoomControl={false}
+      >
+        <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
+        <MapUpdater />
+      </MapContainer>
+    </div>
   )
 }
 
