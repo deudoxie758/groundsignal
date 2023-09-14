@@ -19,7 +19,6 @@ function SearchBar() {
     setQuery(inputValue)
 
     if (!inputValue.trim()) {
-      // If the input is empty, hide the results modal, clear search results, and return
       setShowResultsModal(false)
       setSearchResults([])
       return

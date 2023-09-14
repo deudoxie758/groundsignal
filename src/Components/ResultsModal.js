@@ -3,8 +3,7 @@ import { MapContext } from '../Context/MapProvider'
 import iconPin from '../icon-pin.svg'
 
 function ResultsModal() {
-  const { selectedLocation, showResultsModal, searchResults } =
-    useContext(MapContext)
+  const { selectedLocation, showResultsModal } = useContext(MapContext)
 
   if (!selectedLocation || !showResultsModal) return null
   const resultsCount = selectedLocation ? 1 : 0

@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
-import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet'
 import { MapContext } from '../Context/MapProvider'
 import L from 'leaflet'
 import iconPin from '../icon-pin.svg'
 
 function MapUpdater() {
-  const { selectedLocation, setSelectedLocation, showModal, setShowModal } =
+  const { selectedLocation, setSelectedLocation, setShowModal } =
     useContext(MapContext)
   const map = useMap()
   const customIcon = new L.Icon({
@@ -23,7 +23,7 @@ function MapUpdater() {
     }
   }, [selectedLocation, map])
   if (!selectedLocation) {
-    return null
+    return <Marker icon={customIcon} position={map.getCenter()}></Marker>
   }
 
   return (
@@ -41,13 +41,13 @@ function MapUpdater() {
 }
 
 function MapComponent() {
-  const [mapCenter, setMapCenter] = useState([42.397, -80.644])
+  const [mapCenter] = useState([42.397, -80.644])
   return (
     <div className="h-screen z-0">
       <MapContainer
         center={mapCenter}
-        zoom={5}
-        scrollWheelZoom={false}
+        zoom={8}
+        scrollWheelZoom={true}
         zoomControl={false}
       >
         <TileLayer url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png" />
