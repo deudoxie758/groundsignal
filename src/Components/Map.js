@@ -32,7 +32,6 @@ function MapUpdater() {
       position={[selectedLocation.location.lat, selectedLocation.location.lon]}
       eventHandlers={{
         click: () => {
-          console.log('I work')
           setSelectedLocation(selectedLocation)
           setShowModal(true)
         },

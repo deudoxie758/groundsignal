@@ -59,7 +59,6 @@ function SearchBar() {
         type="text"
         value={query}
         placeholder="Search..."
-        // onChange={handleSearch}
         onChange={(e) => {
           handleSearch(e)
           handleInputChange(e)
